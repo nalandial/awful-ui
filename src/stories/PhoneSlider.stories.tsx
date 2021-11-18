@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { PhoneSlider } from '../components/inputs/PhoneSlider';
+import { PhoneSlider } from '../components/inputs/phone/PhoneSlider';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

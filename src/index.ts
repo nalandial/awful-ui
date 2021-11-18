@@ -1,1 +1,1 @@
-export { PhoneSlider } from './components/inputs/PhoneSlider'
+export { PhoneSlider } from './components/inputs/phone/PhoneSlider'

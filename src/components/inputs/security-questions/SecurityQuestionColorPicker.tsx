@@ -1,29 +1,31 @@
-import React, {FunctionComponent, MouseEvent, useState} from 'react'
+import React, {FunctionComponent, useState} from 'react'
+import {SecurityQuestionOptionProps} from "./SecurityQuestions";
+import {ColorResult, HuePicker} from 'react-color';
 
-export interface ZipCodeDropdownProps {
-    label?: string,
-    testId: string
-}
+export const SecurityQuestionColorPicker: FunctionComponent<SecurityQuestionOptionProps> = () => {
+    const [showPicker, setShowPicker] = useState<boolean>(false)
+    const [color, setColor] = useState<string>('')
 
+    const handleChange = (newColor: ColorResult) => {
+        setColor(newColor.hex)
+    }
 
-export const ZipCodeDropdown: FunctionComponent<ZipCodeDropdownProps> = ({testId, label = 'Select zip code:'}) => {
-    const [zipCode, setZipCode] = useState<string | null>(null)
-    const ref = React.createRef()
-    const move = (e: MouseEvent) => {
-        console.log('foo')
-
-        const element = ref.current
-        const randX = Math.floor(Math.random() * (window.innerWidth - 100));
-        const randY = Math.floor(Math.random() * (window.innerHeight - 100));
-        // console.log([randX, randY]);
-
-        element.animate({"left": randX + "px", "top": randY + "px"});
+    const handleChangeComplete = (newColor: ColorResult) => {
+        setColor(newColor.hex)
+        setShowPicker(false)
     }
 
     return (
-            <select onMouseEnter={move} style={{position: 'relative'}} ref={ref} >
-                <option>foo</option>
-                <option>bar</option>
-            </select>
+        <div>
+            {!showPicker && <input type="text" defaultValue={color ?? ''} onClick={() => setShowPicker(true)}/>}
+            {showPicker &&
+            <>
+                <div style={{width: '300px'}}>
+                    <HuePicker onChange={handleChange} color={color} onChangeComplete={handleChangeComplete}/>
+                    <span>{color}</span>
+                </div>
+            </>
+            }
+        </div>
     )
 }
